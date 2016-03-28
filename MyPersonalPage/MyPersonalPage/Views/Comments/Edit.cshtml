@@ -1,0 +1,48 @@
+﻿@model MyPersonalPage.Models.Comment
+
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    p, input, textarea, label {
+        line-height: normal;
+        font-size: 12px;
+    }
+</style>
+<section id="blog" class="white-bg padding-top-bottom-short">
+
+    <div class="container">
+@using (Html.BeginForm())
+        {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>Edit Comment</h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.HiddenFor(model => model.PostId)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Body, new { @class = "form-control", rows="3" } )
+                    @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdatedReason, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.UpdatedReason, new { @class = "form-control", rows="3" } )
+                @Html.ValidationMessageFor(model => model.UpdatedReason, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+  </div>
+}
+    </div>
+</section>

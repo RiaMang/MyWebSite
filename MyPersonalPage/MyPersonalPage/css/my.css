@@ -1,0 +1,48 @@
+﻿#home {
+   
+    background-image: url('../assets/Blue.jpg');
+    background-size: 100%;
+    
+} 
+
+.descr{
+    display: none;
+}
+
+a:hover + .descr {
+    display: block;
+} 
+
+.top-buffer { margin-top:20px; }
+
+.padding-top-bottom-short {
+    padding: 90px 0;
+}
+
+.smal-fon {
+    font-size:12px;
+}
+
+#blog .section-header{
+    margin-bottom:40px;
+}
+
+#blog img{
+    margin-bottom:40px;
+	border:15px solid transparent;
+	box-shadow:5px 3px 0 rgba(255,255,255,.6);
+}
+
+#blog p{
+    font-size:13px;
+    
+}
+
+#ftr {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ 
+

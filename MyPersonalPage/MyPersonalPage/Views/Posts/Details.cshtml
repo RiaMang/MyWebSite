@@ -1,0 +1,168 @@
+﻿@model MyPersonalPage.Models.Post
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+ p, a{
+        line-height:normal;
+        font-size: 12px;
+    }
+</style>
+<section id="blog" class="white-bg padding-top-bottom-short">
+
+    <div class="container">
+
+        <div class="row">
+            <!-- Blog Post Content Column -->
+            <div class="col-md-8">
+                <!-- Blog Post -->
+                <!-- Title -->
+                <h2>@Model.Title</h2>
+            
+            
+        
+        <!-- Author -->
+        <p>
+            by Ria Manglani
+            <span style="font-size:12px; text-align:right">
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+                    <span>|</span>
+                }
+                @Html.ActionLink("Back to List", "Index")
+            </span>
+        </p>
+        <hr>
+        <!-- Date/Time -->
+        <p style="font-size:12px">
+            <span class="glyphicon glyphicon-time"></span>@Model.Created.DateTime.ToLongDateString()
+
+            @if (Model.Updated != null)
+            {
+            <span style="font-size:12px"> | Revised on : @Model.Updated.Value.DateTime.ToLongDateString()</span>
+
+            }
+            <hr>
+
+            </p>
+            <!-- Preview Image -->
+            @if (Model.MediaURL != null)
+            {
+                var post = Model;
+                //var imgsrc = "~"+Model.MediaURL;
+                <img class="img-responsive" src="@post.MediaURL" alt="">
+                <hr>
+            }
+            
+            <!-- Post Content -->
+            <p class="lead">@Html.Raw(Model.Body)</p>
+            <hr>
+            <!-- Blog Comments -->
+            <!-- Comments Form -->
+            <div class="well">
+                <h3>Leave a Comment:</h3>
+                @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <form role="form" action="@Url.Action("CreateComment","Posts")" method="Post">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="PostId" value="@Model.Id" />  
+                        </div>
+                        <div class="form-group">
+                             <textarea class="form-control" name="Body" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                    
+                }
+                else
+                {
+                   <p>Please <a href="@Url.Action("Login","Account")">log In</a>
+                to leave a comment.</p>
+                }
+            </div>
+            <hr>
+            <!-- Posted Comments -->
+            <!-- Comment -->
+            @foreach (var com in Model.Comments)
+            {
+                <div class="media-body">
+                    <h2 class="media-heading">
+                        <small>@com.Author.DisplayName</small>
+                        <p>@com.Created.DateTime.ToLongDateString()</p>
+                    </h2>
+                    <p>@com.Body</p>
+                </div>
+            
+                if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                {
+                    @Html.ActionLink("Edit Comment", "Edit", "Comments", new { id= com.Id},null)
+                    <span> | </span>
+                    @Html.ActionLink("Delete Comment", "Delete", "Comments", new { id= com.Id},null)
+                <hr>
+                } 
+            }
+           <p style="text-align:right">
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit Post", "Edit", new { id = Model.Id }) 
+                }
+                <span>|</span>
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+
+
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Blog Search Well -->
+                <div class="well">
+                    <h4>Blog Search</h4>
+                    <form action="@Url.Action("Index")" method="post">
+                        <div class="input-group">
+                            <input type="text" name="Query" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn-sm btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.input-group -->
+                </div>
+
+                <!-- Blog Categories Well -->
+                <div class="well">
+                    <h4>Blog Categories</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="@Url.Action("Index", new { cat="Personal"})">Personal</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", new { cat="Professional"})">Professional</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", new { cat="Fun"})">Fun</a>
+                                </li>                                
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <!-- /.row -->
+                </div>
+                
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+</section>

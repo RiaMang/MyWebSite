@@ -45,3 +45,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+MyPersonalPage/packages
+MyPersonalPage/MyPersonalPage/private.config
+MyPersonalPage/MyPersonalPage/dbase.config
+MyPersonalPage/MyPersonalPage/bin
+MyPersonalPage/MyPersonalPage/obj

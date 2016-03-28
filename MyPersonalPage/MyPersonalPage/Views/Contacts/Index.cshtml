@@ -1,0 +1,109 @@
+﻿
+<!-- ==============================================
+        CONTACT
+        =============================================== -->
+@model MyPersonalPage.Models.ContactMessage
+
+<style>
+    .mar {
+        margin: 0px
+    }
+    .wyde input {
+        width: 350px;
+        max-width: 350px;
+        vertical-align: top;
+        margin-bottom: 3px;
+    }
+
+    .lng textarea {
+        height: 100px;
+        max-height: 300px;
+        width: 400px;
+        max-width: 400px;
+        min-width: 207px;
+        vertical-align: top;
+        margin-bottom: 3px;
+    }
+
+    .pad-top {
+        padding: 100px 0 0;
+    }
+    .sec-head {
+        margin-bottom: 30px;
+    }
+
+    #map {
+        width: 500px;
+        height: 400px;
+        background-color: #CCC;
+    }
+</style>
+
+<section id="contact" class="dark-bg light-typo pad-top">
+
+    <div class="container">
+
+        <header class="sec-head text-center">
+
+            <h2 class="scrollimation scale-in">Drop Me a Line</h2>
+            <h4>@ViewBag.MessageSent</h4>
+            <p>Ria Manglani<br />1riamanglani@gmail.com<br /> 336 549 9513</p>
+
+        </header>
+
+        <form id="contact-form" class="bl_form text-center" action="@Url.Action("Index", "Contacts")" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            <span class="field-wrap scrollimation fade-right wyde">
+                <label class="control-label" for="contact-name">Name</label>
+                <input id="contact-name" name="Name" type="text" class="label_better requiredField" data-new-placeholder="Name" placeholder="Name" data-error-empty="*Enter your name">
+            </span>
+            <span class="field-wrap scrollimation fade-in wyde">
+                <label class="control-label" for="contact-mail">Email</label>
+                <input id="contact-mail" name="Email" type="email" class="label_better requiredField" data-new-placeholder="Email Address" placeholder="Email Address" data-error-empty="*Enter your email" data-error-invalid="x Invalid email address">
+            </span>
+            <span class="field-wrap scrollimation fade-left lng">
+                <label class="control-label" for="contact-message">Message</label>
+                <textarea id="contact-message" name="Message" rows="4" class="label_better requiredField" data-new-placeholder="Message" placeholder="Message" data-error-empty="*Enter your message"></textarea>
+            </span>
+            @*<div class="g-recaptcha" data-sitekey="6Ld-XQoTAAAAAKrxaB4zqro1oXYdB3BqkYKP_pm8"></div>*@
+            <p class="text-center"><button name="submit" type="submit" class="btn btn-meflat  mar icon-left" data-error-message="Error!" data-sending-message="Sending..." data-ok-message="Message Sent"><i class="fa fa-paper-plane"></i>Send Message</button>
+            </p>
+            <input type="hidden" name="submitted" id="submitted" value="true"/>
+
+        </form>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div id="map" class="fa-align-center"></div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+</section>
+
+@section scripts{
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    @*<script src="~/Scripts/goolemapsapi.js"></script>>*@
+    <script type="text/javascript">
+    function initialize() {
+        var mapCanvas = document.getElementById('map');
+        var myLatLng = { lat: 36.096607, lng: -80.072174 };
+        var mapOptions = {
+        center: myLatLng,
+        zoom: 8,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: '/"Ah... Life in the Piedmont is grand."/'
+        });
+        }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+}

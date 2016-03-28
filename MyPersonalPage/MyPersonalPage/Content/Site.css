@@ -1,0 +1,109 @@
+﻿
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+#filter-works1 ul li {
+  display: inline-block;
+  padding: 0;
+  line-height: 24px;
+  background: transparent;
+  margin: 0;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+#filter-works1 ul li:hover a {
+  color: #fff;
+  background: #1D2026;
+}
+
+#filter-works1 ul li.active a, #filter-works ul li:hover a {
+  color: #fff;
+  background: #1D2026;
+}
+#filter-works1 ul li a, #filter-works ul li a:active, #filter-works ul li a:hover {
+  font-weight: 300;
+  background: transparent;
+  color: #333;
+  text-decoration: none;
+  background: #fff;
+}
+#filter-works1 ul li a {
+  display: block;
+  font-size: 16px;
+  line-height: 28px;
+  height: 48px;
+  text-transform: uppercase;
+  padding: 10px 45px;
+  border-radius: 48px;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+}
+
+#filter-works1 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.bodyClass {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 18px;
+    color: #3a3c4a;
+    font-weight: 300;
+    overflow-x: hidden;
+}
+
+ /*.mar {
+        margin: 0px
+    }
+    .wyde input{
+      width:350px;
+      max-width:350px;
+      vertical-align:top;
+      margin-bottom: 3px;
+    }
+
+.lng textarea{
+      height:100px;
+      max-height:300px;
+      width:400px;
+      max-width:400px;
+      min-width:207px;
+      vertical-align:top;
+      margin-bottom: 3px;
+    }
+
+.pad-top {
+    padding:100px 0 0;
+}
+.sec-head {
+  margin-bottom: 30px;
+}
+
+  #map {
+        width: 500px;
+        height: 400px;
+        background-color: #CCC;
+    }*/

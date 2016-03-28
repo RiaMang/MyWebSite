@@ -1,0 +1,39 @@
+﻿@using MyPersonalPage.Models
+@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            @{ string pic = User.Identity.GetUserPic();}
+        <li>
+            @if (!string.IsNullOrWhiteSpace(pic) && pic != User.Identity.GetUserName())
+            {
+            <a href="@Url.Action("Index", "Manage")" > Hello ! <img src="@User.Identity.GetUserPic()" style="width: 30px; height:32px"/> </a>
+            }
+            
+            
+            @*if(!string.IsNullOrWhiteSpace(User.Identity.GetDisplayName())
+            {
+                <a href="@Url.Action("Index", "Manage")"> Hello ! @User.Identity.GetDisplayName() </a>
+            }*@
+            else
+            {
+                <a href="@Url.Action("Index", "Manage")"> Hello ! @User.Identity.GetUserName() </a>     
+            }
+        </li>
+        </ul>
+    }
+}
+else
+{
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+        }

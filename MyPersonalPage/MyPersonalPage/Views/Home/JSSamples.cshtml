@@ -1,0 +1,1275 @@
+﻿
+<script type="text/javascript">
+     SyntaxHighlighter.all()
+	/* <!-- MAX OF FIVE -->*/
+	function prep5() {
+	var num1 = parseInt(document.getElementById('firstNum').value);
+	var num2 = parseInt(document.getElementById('secondNum').value);
+	var num3 = parseInt(document.getElementById('thirdNum').value);
+	var num4 = parseInt(document.getElementById('fourthNum').value);
+	var num5 = parseInt(document.getElementById('fifthNum').value);
+	maxOf5(num1,num2,num3,num4,num5);
+	}
+
+	function maxOf5() {
+	var highNum=arguments[0];
+	var tempNum=0;
+    for(i in arguments) {
+		tempNum = arguments[i];
+		highNum = highNum > tempNum?  highNum : tempNum;
+	}
+	$("#result").text("The Highest number is: "+highNum);
+	}
+	 /*<!-- END 'MAX OF FIVE' -->
+
+
+	 <!-- ADD ------------>*/
+	 function prepSum() {
+		var num1 = parseInt(document.getElementById('firstNuma').value);
+		var num2 = parseInt(document.getElementById('secondNuma').value);
+		var num3 = parseInt(document.getElementById('thirdNuma').value);
+		var num4 = parseInt(document.getElementById('fourthNuma').value);
+		var num5 = parseInt(document.getElementById('fifthNuma').value);
+		add(num1,num2,num3,num4,num5);
+	}
+
+	function add() {
+	    var mySum = 0;
+
+	for(i in arguments) {
+		mySum+=arguments[i];
+	}
+	$("#resulta").text("The sum is "+mySum);
+	}
+
+	/* <!---END 'ADD' -------->
+
+	 <!-----MULTIPLY ----->*/
+	function prepToMul() {
+		var num1 = parseInt(document.getElementById('firstNumm').value);
+		var num2 = parseInt(document.getElementById('secondNumm').value);
+		var num3 = parseInt(document.getElementById('thirdNumm').value);
+		var num4 = parseInt(document.getElementById('fourthNumm').value);
+		var num5 = parseInt(document.getElementById('fifthNumm').value);
+		multiply(num1,num2,num3,num4,num5);
+	}
+
+	function multiply() {
+		var myProduct = 1;
+		for(i in arguments) {
+			myProduct*=arguments[i];
+		}
+	$("#resultm").text("The Product is: "+myProduct);
+	}
+	/* <!-----END MULTIPLY-->
+
+	<!--------FACTORIAL --->*/
+	function prepFact() {
+		var num1 = parseInt(document.getElementById('firstNumf').value);
+		factorial(num1);
+	}
+
+	function factorial(num) {
+		var factrl = 1;
+		if(num < 1) {
+			$("#resultf").text("The number must be a positive integer.");
+			return;
+		}
+		for (i=num; i>1; i--) {
+			factrl*=i;
+		}
+		$("#resultf").text("The factorial is: "+factrl);
+	}
+	/*<!-------END FACTORIAL --->
+
+	<!----PALINDROME--->*/
+	function prepPal() {
+		var myStr = document.getElementById('myText').value;
+		if (myStr.length === 0) {
+			$("#resultp").text("Please enter a string!");
+			return;
+		}
+		var result = palindrome(myStr);
+		if (result === true) {
+			$("#resultp").text(" \'"+myStr+"\' is a palindrome.");
+		} else {
+			$("#resultp").text(" \'"+myStr+"\' is not a palindrome.");
+		}
+	}
+
+	function palindrome(str) {
+	for (a=0, b=str.length-1; a<str.length; a++,b--) {
+		if(str.charAt(a) !== str.charAt(b)) {
+			return false;
+		}
+	}
+	return true;
+	}
+	/*<!---END PALINDROME--->
+
+	<!------ FIZZ BUZZ ------>*/
+	function fizzBuzz() {
+	$("#resultfb").text("   1 to 100 : ");
+	for (i=1; i<101; i++) {
+		if ( i%3 === 0 && i%5 === 0) {
+			$("#resultfb").append(" FizzBuzz,");
+		} else if (i%3 === 0) {
+			$("#resultfb").append(" Fizz,");
+		} else if (i%5 === 0) {
+			$("#resultfb").append(" Buzz,");
+		} else {
+			$("#resultfb").append(" "+i+",");
+		}
+	}
+	}
+	/*<!------END FIZZ BUZZ ----->
+
+	<!------ PERFECT NUMBER ----->*/
+function perfectNum() {
+	var num = parseInt(document.getElementById('firstNump').value);
+	if(num < 1) {
+		$("#resultper").text("The number must be a positive integer");
+		return;
+	}
+	var divisors = [];
+	var j=0;
+	for (i=1; i<num; i++) {
+		if(num%i === 0) {
+		divisors[j]=i;
+		j++;
+		}
+	}
+	var sum=divisors.reduce(function(a,b){ return a+b;});
+
+	if(sum === num){
+		$("#resultper").text(num+" is a perfect number");
+	} else {
+		$("#resultper").text(num+" is not a perfect number");
+	}
+}
+	/*<!------ END PERFECT NUMBER ----->
+
+	<!-----DISPLAY PERFECT NUMBERS  ----->*/
+	function dispPerfectNum(){
+		var status = false;
+		for (ctr=1; ctr < 10000; ctr++) {
+			status = perfectNum1(ctr);
+			if ( status === true) {
+				$("#resultdp").append(" "+ctr+",");
+				status=false;
+			}
+		}
+	}
+
+	function perfectNum1(num) {
+		var divisors = [];
+		var j=0;
+		for (i=1; i<num; i++) { // collecting divisors in an array
+			if(num%i === 0) {
+				divisors[j]=i;
+				j++;
+			}
+		}
+		var sum=0;
+		for (i in divisors) { //adding the divisors
+			sum+=divisors[i];
+		}
+		if(sum === num){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	/*<!-----DISPLAY PERFECT NUMBERS ----->
+
+	<!-----HAPPY NUMBERS ---->*/
+	function dispHappyNum(){
+		var status = false;
+		for (hCtr=1,ctr=1; hCtr < 6 ; ctr++) {
+			status = happyNum(ctr);
+			if (status === true) {
+				$("#resulth").append(" "+ctr+",");
+				status=false;
+				hCtr++;
+			}
+		}
+	}
+
+
+	function happyNum(num) {
+	var sum;
+	var sumAray=[];
+	var aray = [];
+
+	while (true) {
+	var str = num.toString();
+	sum = 0;
+
+	for (i=0; i<str.length; i++) {
+		aray[i] = Math.pow(parseInt(str.charAt(i)),2);
+	}
+	for (j in aray)	{
+		sum+=aray[j];
+		aray[j]=0;
+	}
+	if (sum === 1) {
+		sumAray.length=0;
+		return true;
+	} else {
+		for (k in sumAray) {
+			if (sum === sumAray[k]){
+				sumAray.length=0;
+				return false;
+			}
+		}
+		sumAray.push(sum);
+	num=sum;
+	}
+	}
+	}
+	/*<!-----END HAPPY NUMBERS ---->
+
+	<!-----ARMSTRONG NUMBERS ---->*/
+function dispArmNum(){
+	var status = false;
+	for (ctr=100; ctr < 1000 ; ctr++) {
+		status = armNum(ctr);
+		if (status === true) {
+			$("#resultarm").append(" "+ctr+",");
+			status=false;
+		}
+	}
+}
+
+function armNum(num) {
+
+	var aray = [];
+	var str = num.toString();
+
+	for (i=0; i<str.length; i++) { // cube of each digit
+		aray[i] = Math.pow(parseInt(str.charAt(i)),3);
+	}
+	var sum = aray.reduce(function (a, b) { return a + b; });
+
+
+	if (sum === num) {
+		return true;
+	} else {
+		return false;
+	}
+	}
+	/*<!-----END ARMSTRONG NUMBERS ---->*/
+
+</script>
+<script type="text/javascript">
+    /*<!-----LONGEST WORD ---->*/
+    function findLongestWord(evt) {
+        var f = evt.target.files[0];
+        if (f) {
+            var r = new FileReader();
+
+            r.onload = function (e) {
+                var fileContent = r.result;
+                var wordArr = fileContent.split(/[\s,()']+/);
+                var big = " ";
+                for (i in wordArr) {
+                    big = wordArr[i].length > big.length ? wordArr[i] : big;
+                }
+                $("#res").text("The longest word in '" + f.name + "' is '" + big + "'.");
+            }
+
+            r.readAsText(f);
+        } else {
+            $("#res").text("Failed to load file");
+        }
+    }
+
+    /*<!-----END LONGEST WORD --->
+
+	<!-----FILTER LONG WORDS ---->*/
+    function filterLongWords(evt) {
+        var f = evt.target.files[0];
+        // var filepath = document.getElementById('fileInput')
+        // if (filepath && filepath.files[0])
+        if (f) {
+            var r = new FileReader();
+
+            r.onload = function (e) {
+                var fileContent = r.result;
+                var wordArr = [];
+                wordArr = fileContent.split(/[\s,()']+/);
+                var bigArr = [];
+                var chk = false;
+                var num = document.getElementById('numlw').value;
+                for (i in wordArr) {
+                    if (wordArr[i].length > num) {
+                        chk = false;
+                        for (j in bigArr) {
+                            if (wordArr[i] === bigArr[j]) {
+                                chk = true;
+                            }
+                        }
+                        if (chk === false) {
+                            bigArr.push(wordArr[i]);
+                        }
+                    }
+                }
+
+                $("#reslw").text("The words longer than " + num + " are ");
+                for (j in bigArr) {
+                    $("#reslw").append(bigArr[j] + ", ");
+                }
+            }
+
+            r.readAsText(f);
+        } else {
+            $("#reslw").text("Failed to load file");
+        }
+    }
+
+    /*<!-----END FILTER LONG WORDS ---->
+
+	<!-----WORD FREQUENCY---->*/
+    function wordFreq(evt) {
+        var f = evt.target.files[0];
+
+        if (f) {
+            var r = new FileReader();
+            r.onload = function (e) {
+                var fileContent = r.result;
+                var wordArr = fileContent.split(/[\s,()']+/);
+                var wordDict = {}
+                for (var i in wordArr) {
+                    if (wordDict[wordArr[i]])
+                        wordDict[wordArr[i]]++;
+                    else
+                        wordDict[wordArr[i]] = 1;
+                }
+                wordArr = [];
+                for (var key in wordDict) {
+                    wordArr.push({ word: key, count: wordDict[key] })
+                }
+                wordArr.sort(function (a, b) { return a.count - b.count })
+                var result = wordArr.reduce(function (a, v) {
+                    return a +=
+                        "<span>Word: </span>" +
+                        "<span> " + v.word + " </span>" +
+                        "<span>       Count: </span>" +
+                        "<span> " + v.count + " </span><br/>"
+                }, "")
+
+                $("#res2").html(result);
+
+            }
+
+            r.readAsText(f);
+        } else {
+            $("#res2").text("Failed to load file");
+        }
+    }
+
+    /*<!-----END WORD FREQUENCY ---->
+
+	<!-----FIND WORD----->*/
+    function findWord(evt) {
+        var f = evt.target.files[0];
+        if (f) {
+            var r = new FileReader();
+            r.onload = function (e) {
+                var fileContent = r.result;
+                var wordArr = fileContent.split(/[\s,()']+/);
+                var str = document.getElementById('myWord').value;
+                var ctr = 0;
+                for (i in wordArr) {
+                    if (wordArr[i] === str) {
+                        ctr++;
+                    }
+                }
+
+                $("#res3").text("The number of occurances of the word '" + str + "' in the file '" + f.name + "' is " + ctr);
+            }
+            r.readAsText(f);
+        } else {
+            $("#res3").text("Failed to load file");
+        }
+    }
+
+    /*<!-----END FIND WORD ---->*/
+</script>
+
+<div id="filter-works1">
+    <section id="javascript" class="gray-bg padding-top-bottom">
+        <div class="container ">
+            <header class="section-header text-center">
+
+                <h1 class="scrollimation scale-in">Javascript Samples</h1>
+
+
+            </header>
+            <div class="row top-buffer">
+                <ul>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#max">Max of Five</a>
+                            <div class="descr"><br />Display the highest number.</div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#add">Add</a>
+                            <div class="descr"><br />Add five numbers</div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#multiply">Multiply</a>
+                            <div class="descr"><br />Multiply 5 numbers</div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#fact">Factorial</a>
+                            <div class="descr"><br />The factorial of a non-negative integer n is the product of all positive integers less than or equal to n. </div>
+                        </li>
+
+                    </div>
+                </ul>
+            </div>
+            <div class="row top-buffer">
+                <ul>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#palin">Palindrome</a>
+                            <div class="descr"><br />A Palindrome is a string which is the same forwards and backwards.</div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#fizzbuzz">Fizz Buzz</a>
+                            <div class="descr">
+                                <br />
+                                This program iterates from 1 to 100, printing the numbers to the screen.
+                                However, 'Fizz' is printed for multiples of 3, 'Buzz' is printed for multiples of 5,
+                                and "FizzBuzz" is printed for multiples of 3 and 5.
+                            </div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#perfect">Perfect Number</a>
+                            <div class="descr">
+                                <br />
+                                A perfect number is a positive integer that is equal
+                                to the sum of its proper positive divisors, that is,
+                                the sum of its positive divisors excluding the number itself.
+                            </div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#dispPerfect">List Perfect Nos</a>
+                            <div class="descr"><br />Display all perfect numbers between 1 and 10,000.</div>
+                        </li>
+
+                    </div>
+                </ul>
+            </div>
+            <div class="row top-buffer">
+                <ul>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#happy">Happy Numbers</a>
+                            <div class="descr">
+                                <br />
+                                Happy numbers are those that can be reduced to 1 by adding the square of each digit.
+                                This process is repeated until the result is 1 or an endless loop.
+                            </div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#arms">Armstrong Numbers</a>
+                            <div class="descr">
+                                <br />
+                                An Armstrong number is an integer such that the sum of the cubes of
+                                its digits is equal to the number itself.
+                            </div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#longest">Longest Word</a>
+                            <div class="descr"><br />Find the longest word in a selected file.</div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#filter">Filter Long Words</a>
+                            <div class="descr"><br />Find and display all words that are longer than a given number in a selected text file.</div>
+                        </li>
+
+                    </div>
+                </ul>
+            </div>
+            <div class="row top-buffer">
+                <ul>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#wordFreq">Word Frequency</a>
+                            <div class="descr"><br />Display a frequency listing of the words in a selected text file. Order the words by frequency.</div>
+                        </li>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 scrollimation fade right">
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#findWord">Find Word</a>
+                            <div class="descr"><br />Display the total number of occurances of a given word in a selected file.</div>
+                        </li>
+
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- MAX OF 5 MODAL -->
+<div class="modal fade" id="max" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Max of Five</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>Enter 5 numbers. Click the 'Max of 5' button to dispaly the highest number.</p>
+                    <input type="number" id="firstNum" min="1" max="100" value="1" /><br><br>
+                    <input type="number" id="secondNum" min="1" max="100" value="2" /><br><br>
+                    <input type="number" id="thirdNum" min="1" max="100" value="3" /><br><br>
+                    <input type="number" id="fourthNum" min="1" max="100" value="4" /><br><br>
+                    <input type="number" id="fifthNum" min="1" max="100" value="5" /><br><br>
+
+                    <input type="submit" value="Max of 5" onclick="prep5();" />
+                    <span id="result"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function maxOf5() {
+var highNum=arguments[0];
+var tempNum=0;
+for(i in arguments) {
+tempNum = arguments[i];
+highNum = highNum > tempNum?  highNum : tempNum;
+}
+$("#result").text("The Highest number is: "+highNum);
+}
+                    </pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----- END 'MAX OF FIVE' MODAL ---->
+<!------- ADD MODAL ------>
+
+<div class="modal fade" id="add" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Add Five Numbers</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>Enter 5 numbers. Click the Add button to dispaly their sum.</p>
+                    <input type="number" id="firstNuma" min="1" max="100" value="1" /><br><br>
+                    <input type="number" id="secondNuma" min="1" max="100" value="2" /><br><br>
+                    <input type="number" id="thirdNuma" min="1" max="100" value="3" /><br><br>
+                    <input type="number" id="fourthNuma" min="1" max="100" value="4" /><br><br>
+                    <input type="number" id="fifthNuma" min="1" max="100" value="5" /><br><br>
+
+                    <input type="submit" value="Add" onclick="prepSum();" />
+                    <span id="resulta"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function add() {
+var mySum = 0;
+       
+for(i in arguments) {
+mySum+=arguments[i];
+}
+$("#resulta").text("The sum is "+mySum);
+}
+				</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-------END 'ADD' MODAL--->
+<!--- MULTIPLY MODAL-->
+<div class="modal fade" id="multiply" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Multiply</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>Accept 5 numbers from the user. The multiply() dispalys their product.</p>
+                    <input type="number" id="firstNumm" min="1" max="10" value="1" /><br><br>
+                    <input type="number" id="secondNumm" min="1" max="10" value="2" /><br><br>
+                    <input type="number" id="thirdNumm" min="1" max="10" value="3" /><br><br>
+                    <input type="number" id="fourthNumm" min="1" max="10" value="4" /><br><br>
+                    <input type="number" id="fifthNumm" min="1" max="10" value="5" /><br><br>
+
+                    <input type="submit" value="Multiply" onclick="prepToMul();" />
+                    <span id="resultm"> </span>
+
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function multiply() {
+var myProduct = 1;
+for(i in arguments) {
+	myProduct*=arguments[i];
+}
+$("#resultm").text("The Product is: "+myProduct);
+}
+				</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---END 'MULTIPLY' MODAL-->
+<!----Factorial Modal ---->
+<div class="modal fade" id="fact" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Factorial</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>
+                        The factorial of a non-negative integer n is the product of all positive integers less than or equal to n.<br>
+                        Enter a number and click the 'Factorial' button to calculate the factorial.
+                    </p>
+                    <input type="number" id="firstNumf" min="1" max="20" value="1" required /><br><br>
+
+                    <input type="submit" value="Factorial" onclick="prepFact();" />
+                    <span id="resultf"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function factorial(num) {
+var factrl = 1;
+if(num < 1) {
+	$("#resultf").text("The number must be a positive integer.");
+	return;
+}
+for (i=num; i>1; i--) {
+	factrl*=i;
+}
+$("#resultf").text("The factorial is: "+factrl);
+}
+				</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----End Factorial Modal--->
+<!-----PALINDROME MODAL --->
+<div class="modal fade" id="palin" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Palindrome</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>
+                        A Palindrome is a string which is the same forwards and backwards, 'radar', for example.
+                        Enter a string and check if it is a palindrome.
+                    </p>
+                    <input type="text" id="myText" required="required" placeholder="radar" /><br><br>
+
+                    <input type="submit" value="Check" onclick="prepPal();" />
+                    <span id="resultp"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function palindrome(str) {
+for (a=0, b=str.length-1; a<str.length; a++,b--) {
+                                        if(str.charat(a) != =str.charAt(b)) {
+                                        return false;
+                                        }
+                                        }
+                                        return true;
+                                        }
+                    </pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----END PALINDROME MODAL--->
+<!------FIZZ BUZZ MODAL ---->
+<div class="modal fade" id="fizzbuzz" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Fizz Buzz</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>
+                        This program iterates the integers from 1 to 100, printing the numbers to the screen. <br>
+                        However, for each number that is a multiple of 3, "Fizz" is printed instead of the number.<br>
+                        For multiples of 5 "Buzz" is printed instead of the number. <br>
+                        For numbers that are multiples of both 3 and 5 "FizzBuzz" is printed to the screen. <br>
+                    </p>
+                    <input type="submit" value="Try Fizz Buzz" onclick="fizzBuzz()" />
+                    <span id="resultfb"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function fizzBuzz() {
+$("#resultfb").text("   1 to 100 : ");
+for (i=1; i<101; i++) {
+                 if ( i%3= = =0 && i%5= = =0) {
+                 $("#resultfb").append(" fizzbuzz,");
+                 } else if (i%3= = =0) {
+                 $("#resultfb").append(" fizz,");
+                 } else if (i%5= = =0) {
+                 $("#resultfb").append(" buzz,");
+                 } else {
+                 $("#resultfb").append(" "+i+" ,");
+                 }
+                 }
+                 }
+				</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----END FIZZ BUZZ MODAL -->
+<!-----PERFECT NUMBER MODAL---->
+<div class="modal fade" id="perfect" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Perfect Numbers</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>
+                        In number theory, a perfect number is a positive integer that is equal
+                        to the sum of its proper positive divisors, that is,
+                        the sum of its positive divisors excluding the number itself.<br>
+                        The first perfect number is 6 - its positive divisors (excluding itself) are 1, 2, and 3, whose sum is 6.<br>
+                    </p>
+                    <input type="number" id="firstNump" min="1" max="1000" required="required" value="6" /><br><br>
+
+                    <input type="submit" value="Check" onclick="perfectNum();" />
+                    <span id="resultper"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function perfectNum(num) {
+var divisors = [];
+var j=0;
+for (i=1; i<num; i++) { />/ collecting divisors in an array
+	if(num%i === 0) {
+		divisors[j]=i;
+		j++;
+	}
+}
+var sum=divisors.reduce(function(a,b){return a + b;});
+}
+if(sum === num){
+	return true;
+} else {
+	return false;
+}
+}			
+            </pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----END PERFECT NUMBER MODAL--->
+<!-----DISPLAY PERFECT NUMBERS MODAL ----->
+<div class="modal fade" id="dispPerfect" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Display Perfect Numbers</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>
+                        In number theory, a perfect number is a positive integer that is equal to
+                        the sum of its proper positive divisors, that is,
+                        the sum of its positive divisors excluding the number itself.<br>
+                        Click the display button to see a list of perfect numbers between 1 and 10,000.<br>
+                    </p>
+                    <input type="submit" value="Display" onclick="dispPerfectNum();" />
+                    <span id="resultdp"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function perfectNum1(num) {
+var divisors = [];
+var j=0;
+for (i=1; i<num; i++) { />/ collecting divisors in an array
+	if(num%i === 0) {
+		divisors[j]=i;
+		j++;
+	}
+}
+var sum=divisors.reduce(function(a,b){return a + b;});
+}
+if(sum === num){
+	return true;
+} else {
+	return false;
+}
+}	
+				</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----DISPLAY PERFECT NUMBERS MODAL ----->
+<!-----HAPPY NUMBERS MODAL---->
+<div class="modal fade" id="happy" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Happy Numbers</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>
+                        Happy numbers are those that can be reduced to 1 through the following process : <br>
+                        Start with any positive integer, replace the number with the sum of the sqaure of it's digits,
+                        and repeat until the result is 1 or the result is an endless loop.<br>
+                        Click the display button to display the first 5 Happy Numbers.
+                    </p>
+
+                    <input type="submit" value="Display" onclick="dispHappyNum();" />
+                    <span id="resulth"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function happyNum(num) {
+var sum;
+var sumAray=[];
+var aray = [];
+while (true) {
+var str = num.toString();
+sum = 0;
+for (i=0; i<str.length; i++) {
+                        aray[i]=Math.pow(parseInt(str.charAt(i)),2);
+                        }
+                        for (j in aray) {
+                        sum+=aray[j];
+                        aray[j]=0;
+                        }
+                        if (sum= = =1) {
+                        sumaray.length=0;
+                        return true;
+                        } else {
+                        for (k in sumaray) {
+                        if (sum= = =sumAray[k]){
+                        sumaray.length=0;
+                        return false;
+                        }
+                        }
+                        sumaray.push(sum);
+                        num=sum;
+                        }
+                        }
+                        }
+                </pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----END HAPPY NUMBERS MODAL---->
+<!-----ARMSTRONG NUMBERS MODAL---->
+<div class="modal fade" id="arms" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Armstrong Numbers</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>
+                        An Armstrong number is an integer such that the sum of the cubes of its digits is equal to the number itself.<br>
+                        Click the button to find all 3-digit Armstrong Numbers.
+                    </p>
+                    <input type="submit" value="Find" onclick="dispArmNum();" />
+                    <span id="resultarm"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function armNum(num) {
+	
+	var aray = [];
+	var str = num.toString();
+	
+	for (i=0; i<str.length; i++) { />/ cube of each digit
+		aray[i] = Math.pow(parseInt(str.charAt(i)),3);
+	}
+	var sum = aray.reduce(function (a, b) { return a + b; });
+	
+	
+	if (sum === num) {
+		return true;
+	} else {
+		return false;
+	}
+	}
+				</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----END ARMSTRONG NUMBERS MODAL---->
+<!-----LONGEST WORD MODAL---->
+<div class="modal fade" id="longest" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Longest Word</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>Find the longest word in a selected file.</p><br>
+                    <input type="file" id="fileinput" />
+                    <script>document.getElementById('fileinput').addEventListener('change', findLongestWord, false);</script>
+                    <span id="res"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function findLongestWord(evt) {
+var f = evt.target.files[0];
+if (f) {
+var r = new FileReader();
+r.onload = function(e) {
+var fileContent=r.result;
+var wordArr=fileContent.split(/[\s,()']+/);
+var big=" ";
+for (i in wordArr) {
+big=wordArr[i].length > big.length ? wordArr[i]:big;
+}
+$("#res").text("The longest word in '"+f.name+"' is '"+big+"'.");
+}
+r.readAsText(f);
+} else {
+$("#res").text("Failed to load file");
+}
+}
+$("#fileinput").change(findLongestWord);
+				</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----END LONGEST WORD MODAL---->
+<!-----FILTER LONG WORDS MODAL---->
+<div class="modal fade" id="filter" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Filter Long Words</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>Find and display all words that are longer than a given number in a selected text file.</p><br>
+                    <p>Enter the number : </p>
+                    <input type="number" id="numlw" min="1" max="30" required />
+                    <p>Select the file : </p>
+                    <input type="file" id="fileinput1" />
+                    <script>document.getElementById('fileinput1').addEventListener('change', filterLongWords, false);</script>
+                    <span id="reslw"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function filterLongWords(evt) {
+var f = evt.target.files[0];
+if (f) {
+var r = new FileReader();
+r.onload = function(e) {
+var fileContent=r.result;
+var wordArr=[];
+wordArr=fileContent.split(/[\s,()']+/);
+var bigArr = [];
+var chk = false;
+var num = document.getElementById('numlw').value;
+for (i in wordArr) {
+if (wordArr[i].length > num) {
+chk=false;
+for (j in bigArr) {
+if (wordArr[i] === bigArr[j]) {
+chk = true;
+}
+}
+if (chk === false) {
+bigArr.push(wordArr[i]);
+}
+}
+}
+	
+$("#reslw").text("The words longer than "+num+" are ");
+for (j in bigArr) {
+$("#reslw").append(bigArr[j]+", ");
+}
+}
+r.readAsText(f);
+else {
+$("#reslw").text(" failed to load file");
+}
+}
+$("#fileinput").change(filterLongWords);
+    			</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----END FILTER LONG WORDS MODAL---->
+<!-----WORD FREQUENCY MODAL---->
+<div class="modal fade" id="wordFreq" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Word Frequency</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>Display a frequency listing of the words in a selected text file. Order the words by frequency.</p><br>
+                    <p>Select the file : </p>
+                    <input type="file" id="fileinput2" />
+                    <script>document.getElementById('fileinput2').addEventListener('change', wordFreq, false);</script>
+                    <span id="res2"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function wordFreq(evt) {
+var f = evt.target.files[0];
+if (f) {
+var r = new FileReader();
+r.onload = function(e) {
+var fileContent=r.result;
+var wordArr=fileContent.split(/[\s,()']+/);
+var wordDict = {}
+for(var i in wordArr)
+{
+if( wordDict[ wordArr[i] ] )
+wordDict[ wordArr[i] ]++;
+else
+wordDict[ wordArr[i] ] = 1;
+}
+wordArr = [];
+for(var key in wordDict)
+{
+wordArr.push({ word: key, count: wordDict[key] })
+}
+wordArr.sort(function(a,b){ return a.count - b.count })
+var result = wordArr.reduce(function(a,v){ return a +=  
+"<span>Word: </span>" +
+"<span> " + v.word + " </span>" +
+"<span>       Count: </span>" + 
+"<span> " + v.count + " </span><br />"
+}, "")
+			
+$("#res2").html(result);
+		
+}
+r.readAsText(f);
+} else {
+$("#res2").text("failed to load file");
+}
+}
+$("#fileinput2").change(wordfreq);
+				</pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----END WORD FREQUENCY MODAL---->
+<!-----FIND WORD MODAL---->
+<div class="modal fade" id="findWord" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Find Word</h1>
+            </div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5">
+                    <p>Display the total number of occurances of a given word in a selected file.</p><br>
+                    <p>Enter the word : </p>
+                    <input type="text" id="myWord" required="required" placeholder="sample" />
+                    <p>Select the file : </p>
+                    <input type="file" id="fileinput3" />
+                    <script>document.getElementById('fileinput3').addEventListener('change', findWord, false);</script>
+                    <span id="res3"> </span>
+                </div>
+                <div class="col-sm-7 margin-small">
+                    <pre class="brush: js text">
+function findWord(evt) {
+var f = evt.target.files[0]; 
+if (f) {
+var r = new FileReader();
+r.onload = function(e) { 
+var fileContent=r.result;
+var wordArr=fileContent.split(/[\s,()']+/);
+var str = document.getElementById('myWord').value;
+var ctr=0;
+for (i in wordArr) {
+if (wordArr[i] === str) {
+ctr++;
+}
+}
+$("#res3").text("The number of occurances of the word '"+str+"' in the file '"+f.name+"' is "+ctr);
+}
+r.readAsText(f);
+} else {
+$("#res3").text(" failed to load file");
+}
+}
+$("#fileinput3").change(findword);
+				
+                           </pre>
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<!-----END FIND WORD MODAL---->
