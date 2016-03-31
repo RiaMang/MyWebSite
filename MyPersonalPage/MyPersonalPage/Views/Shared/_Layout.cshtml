@@ -56,7 +56,7 @@
 
             <div id="site-nav" class="navbar-collapse collapse">
                 <ul id="top-menu" class="nav navbar-nav">
-                    <li>
+                    <li> <!--class=@{ViewContext.RouteData.Values["action"].ToString() == "Household" ? "active" : ""}-->
                         @Html.ActionLink("What I Do", "Resume", "Home")
                     </li>
                     <li>
