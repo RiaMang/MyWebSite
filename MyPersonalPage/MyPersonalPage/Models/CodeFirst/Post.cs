@@ -7,9 +7,8 @@ using System.Web.Mvc;
 
 namespace MyPersonalPage.Models
 {
-    public class Post
+    public class Post:IValidatableObject
     {
-        
         public int Id { get; set; }
         //[DisplayFormat(DataFormatString="{0:dd/mm/yy}", ApplyFormatInEditMode=true)]
         public DateTimeOffset Created { get; set; }
@@ -25,5 +24,20 @@ namespace MyPersonalPage.Models
         public string Slug { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var TitleProp = new[] { "Title" };
+            var BodyProp = new[] { "Body" };
+            if (Title == "Test")
+            {
+                yield return new ValidationResult("Title cannot be Test!", TitleProp);
+            }
+            if(Body.Length < 10)
+            {
+                yield return new ValidationResult("Body cannot be so small.", BodyProp);
+            }
+        }
+        
     }
 }

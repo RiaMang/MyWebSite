@@ -37,76 +37,90 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body data-spy="scroll" data-target="#main-nav" data-offset="400">
-    <!-- ==============================================
-    MAIN NAV
-    =============================================== -->
-    <div id="main-nav" class="navbar navbar-fixed-top @if(ViewBag.IsHome != true) {<text>scrolled</text> }">
+    @*<div class="page-wrap">*@
+        <!-- ==============================================
+        MAIN NAV
+        =============================================== -->
+        <div id="main-nav" class="navbar navbar-fixed-top @if(ViewBag.IsHome != true) {<text>scrolled</text> }">
+            <div class="container">
+                
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav">
+                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+
+                    <!-- ======= LOGO (for small screens)========-->
+                    <a class="navbar-brand visible-xs scrollto" href="#home">RM</a>
+
+                </div>
+
+                <div id="site-nav" class="navbar-collapse collapse">
+                    <ul id="top-menu" class="nav navbar-nav">
+                        <li>
+                            <!--class=@*@{ViewContext.RouteData.Values["action"].ToString() == "Household" ? "active" : ""}*@-->
+                            @Html.ActionLink("What I Do", "Resume", "Home")
+                        </li>
+                        <li>
+                            @Html.ActionLink("About Me", "About", "Home")
+                        </li>
+                        <li>
+                            @Html.ActionLink("My Works", "Portfolio", "Home")
+                        </li>
+                        <li id="logo">
+                            <a href="@Url.Action("Index", "Home" )">
+                                <h1>R<span>M</span></h1>
+                            </a>
+                        </li>
+
+                        <li>
+                            @Html.ActionLink("Contact Me", "Index", "Contacts")
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                @Html.ActionLink("Admin", "Admin", "Posts")
+                            </li>
+                        }
+                        <li>
+                            @Html.ActionLink("Blog", "Index", "Posts")
+                        </li>
+                        <li>
+                            @Html.Partial("_LoginPartial")
+                        </li>
+                    </ul>
+
+                </div><!--End navbar-collapse -->
+
+            </div><!--End container -->
+
+        </div><!--End main-nav -->
+
+        <section id="">
+
+            <div class="">
+                <div>
+                    @RenderBody()
+
+                </div>
+
+            </div>
+
+        </section>
+        @*<div class="push"></div>*@
+
+    @*</div>*@
+    <div id="main-footer" class="dark-bg light-typo footer">
+
         <div class="container">
 
-            <div class="navbar-header">
-
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav">
-                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </button>
-
-                <!-- ======= LOGO (for small screens)========-->
-                <a class="navbar-brand visible-xs scrollto" href="#home">RM</a>
-
+            <div class="row">
+                <div class="col-sm-6 text-right scrollimation fade-in">
+                    <p id="ftr" style="font-size: 12px">&copy;@DateTime.Now.Year - RM</p>
+                </div>
             </div>
-
-            <div id="site-nav" class="navbar-collapse collapse">
-                <ul id="top-menu" class="nav navbar-nav">
-                    <li> <!--class=@{ViewContext.RouteData.Values["action"].ToString() == "Household" ? "active" : ""}-->
-                        @Html.ActionLink("What I Do", "Resume", "Home")
-                    </li>
-                    <li>
-                        @Html.ActionLink("About Me", "About", "Home")
-                    </li>
-                    <li>
-                        @Html.ActionLink("My Works", "Portfolio", "Home")
-                    </li>
-                    <li id="logo">
-                        <a href="@Url.Action("Index", "Home" )" >
-                            <h1>R<span>M</span></h1>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        @Html.ActionLink("Contact Me", "Index", "Contacts")
-                    </li>
-                    @if(User.IsInRole("Admin"))
-                    {
-                    <li>
-                        @Html.ActionLink("Admin", "Admin", "Posts")
-                    </li>
-                    }
-                    <li>
-                        @Html.ActionLink("Blog", "Index", "Posts")
-                    </li>
-                    <li>
-                        @Html.Partial("_LoginPartial")
-                    </li>
-                </ul>
-              
-            </div><!--End navbar-collapse -->
-
-        </div><!--End container -->
-
-    </div><!--End main-nav -->
-    <section id="">
-
-        <div class="">
-            <div>
-                @RenderBody()
-
-            </div>
-
         </div>
-
-    </section>       
-            
-    
-        
+    </div>
         @*<footer id="main-footer" class="dark-bg light-typo">
 
             <div class="container">
