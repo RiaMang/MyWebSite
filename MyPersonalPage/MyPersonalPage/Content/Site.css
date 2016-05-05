@@ -13,6 +13,15 @@ footer {
     width: 100%;
 }*/ /*This wouild be the code for an absolute sticky footer.*/
 
+
+
+
+/* to make the page full*/
+.fullPage{
+    height: 100vh;
+}
+
+
  * {
 margin: 0;
 }
